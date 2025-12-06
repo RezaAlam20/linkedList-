@@ -35,11 +35,40 @@ class LinkedList {
     this.count = this.count + 1;
   }
   size() {
-    console.log(this.count);
+    return this.count;
   }
   tail() {
     let lastOne = this.traverse(this.headNode);
-    console.log(lastOne);
+    return lastOne;
+  }
+  at(index) {
+    let currIndex = 0;
+    let currnNode = this.headNode;
+    while (currIndex < index) {
+      currnNode = currnNode.next;
+      currIndex++;
+    }
+    if (currIndex == index) {
+      return currnNode;
+    }
+  }
+  pop() {
+    let oneBeforeLast = this.at(this.count - 1);
+
+    oneBeforeLast.next = null;
+  }
+  contains(value) {
+    let currNode = this.headNode;
+    let currValue = currNode.data;
+
+    while (currNode != null) {
+      if (currValue == value) {
+        return currNode;
+      } else {
+        currNode = currNode.next;
+        currValue = currNode.data;
+      }
+    }
   }
 }
 
@@ -48,8 +77,6 @@ testList.append("second");
 testList.append("third ");
 testList.append("fourth");
 
-testList.prepend("before second");
+testList.prepend("first");
 
-testList.print();
-testList.size();
-testList.tail();
+console.log(testList.contains("third"));
