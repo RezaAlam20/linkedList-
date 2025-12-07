@@ -16,8 +16,9 @@ class LinkedList {
     last.next = newNode;
     this.count = this.count + 1;
   }
-  print() {
-    console.log(this.headNode);
+  toString() {
+    let string = JSON.stringify(this.headNode);
+    return string;
   }
   traverse(node) {
     if (node.next == null) {
@@ -63,20 +64,43 @@ class LinkedList {
 
     while (currNode != null) {
       if (currValue == value) {
-        return currNode;
+        return true;
       } else {
         currNode = currNode.next;
+        if (currNode == null) {
+          return false;
+        }
         currValue = currNode.data;
+      }
+    }
+  }
+  find(value) {
+    let currNode = this.headNode;
+    let currvalue = currNode.data;
+    let count = 0;
+    while (currNode != null) {
+      if (currvalue == value) {
+        return count;
+      } else if (currvalue != value) {
+        count++;
+        if (currNode.next == null) {
+          return "Node doesn't exist ";
+        }
+        currNode = currNode.next;
+        currvalue = currNode.data;
       }
     }
   }
 }
 
-let testList = new LinkedList();
-testList.append("second");
-testList.append("third ");
-testList.append("fourth");
+// example uses class syntax - adjust as necessary
+const list = new LinkedList();
 
-testList.prepend("first");
+list.append("dog");
+list.append("cat");
+list.append("parrot");
+list.append("hamster");
+list.append("snake");
+list.append("turtle");
 
-console.log(testList.contains("third"));
+console.log(list.toString());
